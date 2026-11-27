@@ -1,48 +1,98 @@
-<!doctype html>
-<html lang="pt-BR" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Modelo de Jogo — Jogos VR</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="app">
-      <header class="top">
-        <div>
-          <span class="kicker">Modelo</span>
-          <h1 id="title">Clique no Alvo</h1>
-          <p class="subtitle">Troque este jogo pelo seu. O contrato já está pronto.</p>
-        </div>
-        <button id="restart" class="btn" type="button">Reiniciar</button>
-      </header>
-
-      <main>
-        <div class="hud">
-          <span class="pill">Alvos: <strong id="score">0</strong>/<span id="total">10</span></span>
-          <span class="pill">Tempo: <strong id="timer">0,0s</strong></span>
-        </div>
-
-        <div id="board" class="board" aria-label="Área do jogo">
-          <p id="start-hint" class="start-hint">Clique no alvo para começar</p>
-        </div>
-      </main>
-
-      <footer class="bottom">
-        <p>Este é o arquivo <code>game.js</code>. Leia os comentários e adapte.</p>
-      </footer>
-    </div>
-
-    <div id="result" class="overlay" hidden>
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="result-title">
-        <div class="modal-icon" aria-hidden="true">🎯</div>
-        <h2 id="result-title">Muito bem!</h2>
-        <p id="result-text">Você concluiu o jogo.</p>
-        <button id="play-again" class="btn btn-primary full" type="button">Jogar de novo</button>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-Termo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container-principal">
+    <!-- Cabeçalho metálico com informações do jogo -->
+    <header class="cabecalho-metal">
+      <div class="titulo-area">
+        <h1 class="logo-neon">X-TERMO</h1>
+        <span id="badge-nivel" class="badge-nivel">Nível 1 • Fácil</span>
       </div>
+      <div class="status-area">
+        <div class="info-box">
+          <span class="rotulo">Rodada</span>
+          <strong id="texto-rodada">1 / 10</strong>
+        </div>
+        <div class="info-box">
+          <span class="rotulo">Pontos</span>
+          <strong id="texto-pontos">0</strong>
+        </div>
+        <button id="btn-tema" class="btn-icone" type="button" aria-label="Alternar tema claro e escuro" title="Mudar tema">
+          🌓
+        </button>
+      </div>
+    </header>
+
+    <!-- Painel com a dica do significado -->
+    <section class="painel-dica" aria-live="polite">
+      <span class="etiqueta-dica">DICA DE VOCABULÁRIO</span>
+      <p id="texto-dica" class="texto-dica">Carregando desafio...</p>
+    </section>
+
+    <!-- Grade 6x5 onde aparecem as tentativas -->
+    <section class="area-tabuleiro" aria-label="Tabuleiro de letras">
+      <div id="grade-letras" class="grade-letras"></div>
+    </section>
+
+    <!-- Mensagem rápida de acerto, erro ou aviso -->
+    <div id="area-feedback" class="area-feedback oculto" role="status" aria-live="polite">
+      <p id="texto-feedback"></p>
+      <button id="btn-proxima" class="btn-acao oculto" type="button">Próxima Palavra</button>
     </div>
 
-    <script src="game.js"></script>
-  </body>
+    <!-- Teclado virtual acessível para celular e computador -->
+    <section id="teclado-virtual" class="teclado-virtual" aria-label="Teclado do jogo">
+      <div class="linha-teclado">
+        <button type="button" class="tecla" data-tecla="Q">Q</button>
+        <button type="button" class="tecla" data-tecla="W">W</button>
+        <button type="button" class="tecla" data-tecla="E">E</button>
+        <button type="button" class="tecla" data-tecla="R">R</button>
+        <button type="button" class="tecla" data-tecla="T">T</button>
+        <button type="button" class="tecla" data-tecla="Y">Y</button>
+        <button type="button" class="tecla" data-tecla="U">U</button>
+        <button type="button" class="tecla" data-tecla="I">I</button>
+        <button type="button" class="tecla" data-tecla="O">O</button>
+        <button type="button" class="tecla" data-tecla="P">P</button>
+      </div>
+      <div class="linha-teclado">
+        <button type="button" class="tecla" data-tecla="A">A</button>
+        <button type="button" class="tecla" data-tecla="S">S</button>
+        <button type="button" class="tecla" data-tecla="D">D</button>
+        <button type="button" class="tecla" data-tecla="F">F</button>
+        <button type="button" class="tecla" data-tecla="G">G</button>
+        <button type="button" class="tecla" data-tecla="H">H</button>
+        <button type="button" class="tecla" data-tecla="J">J</button>
+        <button type="button" class="tecla" data-tecla="K">K</button>
+        <button type="button" class="tecla" data-tecla="L">L</button>
+      </div>
+      <div class="linha-teclado">
+        <button type="button" class="tecla tecla-especial" data-tecla="ENTER">ENVIAR</button>
+        <button type="button" class="tecla" data-tecla="Z">Z</button>
+        <button type="button" class="tecla" data-tecla="X">X</button>
+        <button type="button" class="tecla" data-tecla="C">C</button>
+        <button type="button" class="tecla" data-tecla="V">V</button>
+        <button type="button" class="tecla" data-tecla="B">B</button>
+        <button type="button" class="tecla" data-tecla="N">N</button>
+        <button type="button" class="tecla" data-tecla="M">M</button>
+        <button type="button" class="tecla tecla-especial" data-tecla="APAGAR" aria-label="Apagar letra">⌫</button>
+      </div>
+    </section>
+
+    <!-- Tela final de vitória ou derrota -->
+    <section id="tela-final" class="tela-final oculto" aria-live="polite">
+      <h2 id="titulo-final" class="titulo-final">Fim de Jogo</h2>
+      <p id="resumo-final" class="resumo-final"></p>
+      <div id="explicacao-final" class="explicacao-final"></div>
+      <button id="btn-reiniciar" class="btn-acao" type="button">Jogar Novamente</button>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
 </html>

@@ -1,16 +1,16 @@
 {
-  "slug": "meu-jogo",
-  "title": "Nome do meu jogo",
-  "author": "Seu nome",
-  "authorClass": "Sua turma",
-  "discipline": "Matemática",
-  "grades": ["6º", "7º"],
-  "tags": ["palavra-chave", "outra-palavra"],
-  "description": "Uma frase curta que explica o que o jogo ensina.",
-  "instructions": "Como jogar, em uma ou duas frases.",
-  "duration": 5,
+  "slug": "x-termo",
+  "title": "X-Termo",
+  "author": "Ruiz",
+  "authorClass": "9º B",
+  "discipline": "Português",
+  "grades": ["6º ano", "7º ano", "8º ano", "9º ano"],
+  "tags": ["vocabulário", "palavras", "termo", "ortografia", "português"],
+  "description": "Descubra o significado de palavras novas em 10 rodadas divididas em 3 níveis de dificuldade com visual neon metálico.",
+  "instructions": "Leia a dica de vocabulário e tente adivinhar a palavra secreta de 5 letras em até 6 tentativas. Verde indica letra no lugar certo, amarelo indica letra em outra posição e cinza indica que a letra não existe na palavra.",
+  "duration": "2 a 4 minutos",
   "version": "1.0.0",
   "entry": "index.html",
   "cover": "cover.svg",
-  "createdAt": "2026-11-02"
+  "createdAt": "2026-11-27"
 }
